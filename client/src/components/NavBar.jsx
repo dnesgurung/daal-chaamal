@@ -83,7 +83,7 @@ const NavBar = () => {
       >
         {/* Menu Icon SVG */}
 
-        <img src={assets.menu_icon} alt />
+        <img src={assets.menu_icon} alt="icon" />
       </button>
 
       {/* Mobile Menu */}

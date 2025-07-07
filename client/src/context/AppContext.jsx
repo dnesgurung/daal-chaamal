@@ -22,8 +22,8 @@ export const AppContextProvider = ({ children }) => {
   };
 
   // Add Product to Cart
-  const addToCart = () => {
-    let cartData = structuredClone(carItems);
+  const addToCart = (itemId) => {
+    let cartData = structuredClone(cartItems);
 
     if (cartData[itemId]) {
       cartData[itemId] += 1;
@@ -43,7 +43,7 @@ export const AppContextProvider = ({ children }) => {
   };
 
   // Remove Product from Cart
-  const removeFromCart = ()=>  {
+  const removeFromCart = (itemId)=>  {
     let cartData = structuredClone(cartItems);
     if(cartData[itemId]){
         cartData[itemId] -=1;

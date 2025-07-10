@@ -3,22 +3,28 @@ import { NavLink } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
 
-
 const NavBar = () => {
   const [open, setOpen] = React.useState(false);
-  const { user, setUser, setShowUserLogin, navigate, setSearchQuery, searchQuery } = useAppContext();
-
+  const {
+    user,
+    setUser,
+    setShowUserLogin,
+    navigate,
+    setSearchQuery,
+    searchQuery,
+    getCartCount,
+  } = useAppContext();
 
   const logOut = async () => {
     setUser(null);
     navigate("/");
   };
 
-useEffect(()=> {
-  if(searchQuery.length>0){
-    navigate("/products")
-  }
-}, [searchQuery])
+  useEffect(() => {
+    if (searchQuery.length > 0) {
+      navigate("/products");
+    }
+  }, [searchQuery]);
 
   return (
     <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
@@ -38,7 +44,7 @@ useEffect(()=> {
             className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
             type="text"
             placeholder="Search products"
-            onChange={(e)=> setSearchQuery(e.target.value) }
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
 
           <img src={assets.search_icon} alt="search" className="w-4 h-4" />
@@ -51,7 +57,7 @@ useEffect(()=> {
           <img src={assets.nav_cart_icon} className="w-6 opacity-80" />
 
           <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">
-            3
+            {getCartCount()}
           </button>
         </div>
 
@@ -83,15 +89,26 @@ useEffect(()=> {
         )}
       </div>
 
-      <button
-        onClick={() => (open ? setOpen(false) : setOpen(true))}
-        aria-label="Menu"
-        className="sm:hidden"
-      >
-        {/* Menu Icon SVG */}
+      <div className="flex items-center gap-6 sm:hidden">
+        <div
+          onClick={() => navigate("/cart")}
+          className="relative cursor-pointer"
+        >
+          <img src={assets.nav_cart_icon} className="w-6 opacity-80" />
 
-        <img src={assets.menu_icon} alt="icon" />
-      </button>
+          <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">
+            {getCartCount()}
+          </button>
+        </div>
+        <button
+          onClick={() => (open ? setOpen(false) : setOpen(true))}
+          aria-label="Menu"
+        >
+          {/* Menu Icon SVG */}
+
+          <img src={assets.menu_icon} alt="icon" />
+        </button>
+      </div>
 
       {/* Mobile Menu */}
 

@@ -10,6 +10,7 @@ const SellerLogin = () => {
     event.preventDefault();
     setIsSeller(true);
   };
+  
 
   useEffect(() => {
     if (isSeller) {

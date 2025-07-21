@@ -1,4 +1,4 @@
-
+import jwt from 'jsonwebtoken'
 
 // Login Seller : /api/seller/login
 
@@ -7,7 +7,7 @@ try {
     const{email, password} =  req.body;
 
 if(password === process.env.SELLER_PASSWORD && email === process.env.SELLER_EMAIL){
-    const token = JsonWebTokenError.sign({email}, process.env.JWT_SECRET, {expiresIn: '7d'});
+    const token = jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: '7d'});
 
 res.cookie('sellerToken', token, {
     httpOnly: true,

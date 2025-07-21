@@ -10,7 +10,25 @@ const AddProduct = () => {
   const [offerPrice, setOfferPrice] = useState("");
 
   const onSubmitHandler = async (event) => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
+      const {productData} = {
+        name,
+        description: description.split('\n'),
+        category,
+        price,
+        offerPrice
+      }
+      
+      const formData = new FormData();
+      formData.append('productData', JSON.stringify(productData));
+      for ( let i = 0; i < files.length; i ++){
+        
+      }
+
+    } catch (error) {
+      
+    }
   };
 
   return (

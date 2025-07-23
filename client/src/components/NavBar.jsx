@@ -4,7 +4,7 @@ import { assets } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
 
 const NavBar = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen, axios] = React.useState(false);
   const {
     user,
     setUser,
@@ -16,8 +16,18 @@ const NavBar = () => {
   } = useAppContext();
 
   const logOut = async () => {
-    setUser(null);
-    navigate("/");
+    try {
+      const { data } = await axios.get("/api/user/logout");
+      if (data.success) {
+        toast.success(data.message);
+        setUser(null);
+        navigate("/");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   useEffect(() => {
